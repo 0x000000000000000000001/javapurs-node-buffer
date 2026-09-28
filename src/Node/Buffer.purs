@@ -185,10 +185,10 @@ size :: Buffer -> Effect Int
 size = usingFromImmutable Immutable.size
 
 concat :: Array Buffer -> Effect Buffer
-concat arrs = unsafeCoerce \_ -> Immutable.concat (unsafeCoerce arrs)
+concat arrs = pure $ unsafeCoerce (Immutable.concat (unsafeCoerce arrs))
 
 concat' :: Array Buffer -> Int -> Effect Buffer
-concat' arrs n = unsafeCoerce \_ -> Immutable.concat' (unsafeCoerce arrs) n
+concat' arrs n = pure $ unsafeCoerce (Immutable.concat' (unsafeCoerce arrs) n)
 
 copy :: Offset -> Offset -> Buffer -> Offset -> Buffer -> Effect Int
 copy srcStart srcEnd src targStart targ = do
